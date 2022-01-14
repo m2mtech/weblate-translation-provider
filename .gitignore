@@ -1,0 +1,5 @@
+.ecs_cache
+.phpunit.result.cache
+var
+vendor
+composer.lock
