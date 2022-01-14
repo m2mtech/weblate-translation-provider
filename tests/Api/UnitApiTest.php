@@ -25,7 +25,7 @@ class UnitApiTest extends ApiTest
     private function setupFactory(array $responses): void
     {
         UnitApi::setup(
-            new MockHttpClient($responses),
+            new MockHttpClient($responses, 'https://v5.3.ignores/baseUri'),
             $this->createMock(LoggerInterface::class)
         );
     }

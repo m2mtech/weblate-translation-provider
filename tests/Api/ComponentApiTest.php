@@ -24,7 +24,7 @@ class ComponentApiTest extends ApiTest
     private function setupFactory(array $responses): void
     {
         ComponentApi::setup(
-            new MockHttpClient($responses),
+            new MockHttpClient($responses, 'https://v5.3.ignores/baseUri'),
             $this->createMock(LoggerInterface::class),
             'project',
             'en'

@@ -45,6 +45,7 @@ class TestKernel extends Kernel
                     'providers' => [
                         'weblate' => [
                             'dsn' => 'weblate://project:key@server',
+                            'locales' => ['en', 'de'],
                         ],
                     ],
                 ],
