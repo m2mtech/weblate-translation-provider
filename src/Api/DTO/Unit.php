@@ -9,9 +9,7 @@
 
 namespace M2MTech\WeblateTranslationProvider\Api\DTO;
 
-use Spatie\DataTransferObject\FlexibleDataTransferObject;
-
-class Unit extends FlexibleDataTransferObject
+class Unit extends DTO
 {
     /** @var string */
     public $context;

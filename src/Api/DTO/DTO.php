@@ -9,20 +9,12 @@
 
 namespace M2MTech\WeblateTranslationProvider\Api\DTO;
 
-class Translation extends DTO
-{
-    /** @var string */
-    public $language_code;
-
-    /** @var string */
-    public $filename;
-
-    /** @var string */
-    public $file_url;
-
-    /** @var string */
-    public $units_list_url;
-
-    /** @var bool */
-    public $created = false;
+if (class_exists('Spatie\DataTransferObject\FlexibleDataTransferObject')) {
+    class DTO extends \Spatie\DataTransferObject\FlexibleDataTransferObject
+    {
+    }
+} else {
+    class DTO extends \Spatie\DataTransferObject\DataTransferObject
+    {
+    }
 }

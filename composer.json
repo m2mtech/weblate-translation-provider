@@ -20,9 +20,9 @@
     "require": {
         "php": ">=7.2.5",
         "ext-json": "*",
-        "spatie/data-transfer-object": "^1.14.1",
+        "spatie/data-transfer-object": "^1.14|^2.8|^3.7",
         "symfony/config": "^5.3|^6.0",
-        "symfony/dependency-injection": "^v5.3|^6.0",
+        "symfony/dependency-injection": "^5.3|^6.0",
         "symfony/http-client": "^5.3|^6.0",
         "symfony/http-kernel": "^5.3|^6.0",
         "symfony/mime": "^5.3|^6.0",
