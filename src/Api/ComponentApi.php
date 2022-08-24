@@ -34,16 +34,21 @@ class ComponentApi
     /** @var string */
     private static $defaultLocale;
 
+    /** @var bool */
+    private static $useHttps;
+
     public static function setup(
         HttpClientInterface $client,
         LoggerInterface $logger,
         string $project,
-        string $defaultLocale
+        string $defaultLocale,
+        bool $useHttps,
     ): void {
         self::$client = $client;
         self::$logger = $logger;
         self::$project = $project;
         self::$defaultLocale = $defaultLocale;
+        self::$useHttps = $useHttps;
 
         self::$components = [];
     }

@@ -29,12 +29,17 @@ class TranslationApi
     /** @var LoggerInterface */
     private static $logger;
 
+    /** @var bool */
+    private static bool $useHttps;
+
     public static function setup(
         HttpClientInterface $client,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        bool $useHttps,
     ): void {
         self::$client = $client;
         self::$logger = $logger;
+        self::$useHttps = $useHttps;
 
         self::$translations = [];
     }
@@ -59,7 +64,7 @@ class TranslationApi
          *
          * @see https://docs.weblate.org/en/latest/api.html#get--api-components-(string-project)-(string-component)-translations-
          */
-        $response = self::$client->request('GET', $component->translations_url);
+        $response = self::$client->request('GET', self::$useHttps ? preg_replace('/^http:/', "https:", $component->translations_url) : $component->translations_url);
 
         if (200 !== $response->getStatusCode()) {
             self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
@@ -139,7 +144,7 @@ class TranslationApi
         ];
         $formData = new FormDataPart($formFields);
 
-        $response = self::$client->request('POST', $translation->file_url, [
+        $response = self::$client->request('POST', self::$useHttps ? preg_replace('/^http:/', "https:", $translation->file_url) : $translation->file_url, [
             'headers' => $formData->getPreparedHeaders()->toArray(),
             'body' => $formData->bodyToString(),
         ]);
@@ -162,7 +167,7 @@ class TranslationApi
          *
          * @see https://docs.weblate.org/en/latest/api.html#get--api-translations-(string-project)-(string-component)-(string-language)-file-
          */
-        $response = self::$client->request('GET', $translation->file_url);
+        $response = self::$client->request('GET', self::$useHttps ? preg_replace('/^http:/', "https:", $translation->file_url) : $translation->file_url);
 
         if (200 !== $response->getStatusCode()) {
             self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));

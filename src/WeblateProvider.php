@@ -48,7 +48,8 @@ class WeblateProvider implements ProviderInterface
         XliffFileDumper $xliffFileDumper,
         string $defaultLocale,
         string $endpoint,
-        string $project
+        string $project,
+        bool $useHttps,
     ) {
         $this->loader = $loader;
         $this->logger = $logger;
@@ -58,8 +59,8 @@ class WeblateProvider implements ProviderInterface
 
         $this->endpoint = $endpoint;
 
-        ComponentApi::setup($client, $logger, $project, $defaultLocale);
-        TranslationApi::setup($client, $logger);
+        ComponentApi::setup($client, $logger, $project, $defaultLocale, $useHttps);
+        TranslationApi::setup($client, $logger, $useHttps);
         UnitApi::setup($client, $logger);
     }
 

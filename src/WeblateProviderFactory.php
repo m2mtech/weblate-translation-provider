@@ -95,7 +95,8 @@ class WeblateProviderFactory extends AbstractProviderFactory
             $this->xliffFileDumper,
             $this->defaultLocale,
             $endpoint,
-            $this->getUser($dsn)
+            $this->getUser($dsn),
+            $this->bundleConfig['https']
         );
     }
 }
