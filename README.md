@@ -61,7 +61,7 @@ bin/console translation:pull [options] weblate
 
 ## Testing
 
-This package has been developed for php 7.4 with compatibility tested for php 7.2 to 8.1.
+This package has been developed for php 7.4 with compatibility tested for php 7.2 to 8.2RC2.
 
 ```bash
 composer test

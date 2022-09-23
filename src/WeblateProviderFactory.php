@@ -73,12 +73,13 @@ class WeblateProviderFactory extends AbstractProviderFactory
 
         $endpoint = $dsn->getHost();
         $endpoint .= $dsn->getPort() ? ':'.$dsn->getPort() : '';
-        $path = trim($dsn->getPath(), '/');
-        if (strlen($path) > 0) {
-            $path = '/'.$path;
+        $path = trim($dsn->getPath() ?? '', '/');
+        if ('' !== $path) {
+            $endpoint .= '/'.$path;
         }
+
         $api = $this->bundleConfig['https'] ? 'https://' : 'http://';
-        $api .= $endpoint.$path.'/api/';
+        $api .= $endpoint.'/api/';
 
         $client = ScopingHttpClient::forBaseUri(
             $this->client,

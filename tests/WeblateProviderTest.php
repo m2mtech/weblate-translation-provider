@@ -60,7 +60,8 @@ class WeblateProviderTest extends ProviderTestCase
         string $expectedBody,
         string $result,
         int $statusCode = 200
-    ): callable {
+    ): callable
+    {
         return function (string $method, string $url, array $options = []) use ($expectedUrl, $expectedMethod, $expectedBody, $result, $statusCode): ResponseInterface {
             $this->assertSame($expectedMethod.' '.$expectedUrl, $method.' '.$url);
             $this->assertSame('Authorization: Bearer API_TOKEN', $options['normalized_headers']['authorization'][0]);

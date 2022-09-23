@@ -43,6 +43,16 @@ class WeblateProviderFactoryTest extends ProviderFactoryTestCase
             'weblate://server',
             'weblate://project:key@server',
         ];
+
+        yield [
+            'weblate://server/path',
+            'weblate://project:key@server/path',
+        ];
+
+        yield [
+            'weblate://server/bla/bla/bla',
+            'weblate://project:key@server/bla/bla/bla/',
+        ];
     }
 
     public function incompleteDsnProvider(): iterable

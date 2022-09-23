@@ -9,27 +9,27 @@
 
 declare(strict_types=1);
 
-use PhpCsFixer\Fixer\Import\OrderedImportsFixer;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Symplify\EasyCodingStandard\ValueObject\Option;
+use PhpCsFixer\Fixer\Operator\ConcatSpaceFixer;
+use Symplify\EasyCodingStandard\Config\ECSConfig;
 use Symplify\EasyCodingStandard\ValueObject\Set\SetList;
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $parameters = $containerConfigurator->parameters();
-    $parameters->set(Option::PATHS, [
+return static function (ECSConfig $ecsConfig): void {
+    $ecsConfig->sets([
+        SetList::CLEAN_CODE,
+        SetList::PSR_12,
+    ]);
+
+    $ecsConfig->rule(ConcatSpaceFixer::class);
+
+    $ecsConfig->paths([
         __DIR__.'/src',
         __DIR__.'/tests',
     ]);
 
-    $parameters->set(Option::SKIP, [
-        OrderedImportsFixer::class => [
-            __DIR__.'/src/Resources/config/services.php',
-        ],
+    $ecsConfig->skip([
+        __DIR__.'/src/Resources/assets',
     ]);
 
-    $containerConfigurator->import(SetList::SYMFONY);
-    $containerConfigurator->import(SetList::CLEAN_CODE);
-
-    $parameters->set(Option::CACHE_DIRECTORY, __DIR__.'/.ecs_cache');
-    $parameters->set(Option::PARALLEL, true);
+    $ecsConfig->cacheDirectory(__DIR__.'/.ecs_cache');
+    $ecsConfig->parallel();
 };
