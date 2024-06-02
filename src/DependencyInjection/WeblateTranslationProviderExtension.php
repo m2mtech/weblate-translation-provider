@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 class WeblateTranslationProviderExtension extends Extension
 {
     /**
-     * @param array<string,string> $configs
+     * @param array<array<mixed>> $configs
      *
      * @throws Exception
      */
@@ -27,7 +27,7 @@ class WeblateTranslationProviderExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.php');
 
         $definition = $container->getDefinition('m2mtech.translation.provider_factory.weblate');

@@ -72,21 +72,21 @@ class WeblateProviderFactory extends AbstractProviderFactory
         }
 
         $endpoint = $dsn->getHost();
-        $endpoint .= $dsn->getPort() ? ':'.$dsn->getPort() : '';
+        $endpoint .= $dsn->getPort() ? ':' . $dsn->getPort() : '';
         $path = trim($dsn->getPath() ?? '', '/');
         if ('' !== $path) {
-            $endpoint .= '/'.$path;
+            $endpoint .= '/' . $path;
         }
 
         $api = $this->bundleConfig['https'] ? 'https://' : 'http://';
-        $api .= $endpoint.'/api/';
+        $api .= $endpoint . '/api/';
 
         $client = ScopingHttpClient::forBaseUri(
             $this->client,
             $api,
             [
                 'headers' => [
-                    'Authorization' => 'Token '.$this->getPassword($dsn),
+                    'Authorization' => 'Token ' . $this->getPassword($dsn),
                 ],
                 'verify_peer' => $this->bundleConfig['verify_peer'],
             ],

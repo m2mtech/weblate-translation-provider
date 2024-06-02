@@ -124,7 +124,7 @@ class UnitApiTest extends ApiTest
         $value = $faker->sentence();
 
         $this->setupFactory([
-            $this->getAddUnitResponse($translation, 'key='.$key.'&value='.urlencode($value)),
+            $this->getAddUnitResponse($translation, 'key=' . $key . '&value=' . urlencode($value)),
         ]);
 
         UnitApi::addUnit($translation, $key, $value);
@@ -158,7 +158,7 @@ class UnitApiTest extends ApiTest
         $value = DTOFaker::getFaker()->sentence();
 
         $this->setupFactory([
-            $this->getUpdateUnitResponse($unit, 'target='.urlencode($value).'&state=20'),
+            $this->getUpdateUnitResponse($unit, 'target=' . urlencode($value) . '&state=20'),
         ]);
 
         UnitApi::updateUnit($unit, $value);

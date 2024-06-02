@@ -68,10 +68,10 @@ class ComponentApi
          *
          * @see https://docs.weblate.org/en/latest/api.html#get--api-projects-(string-project)-components-
          */
-        $response = self::$client->request('GET', 'projects/'.self::$project.'/components/');
+        $response = self::$client->request('GET', 'projects/' . self::$project . '/components/');
 
         if (200 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
             throw new ProviderException('Unable to get weblate components.', $response);
         }
 
@@ -85,7 +85,7 @@ class ComponentApi
             }
 
             self::$components[$component->slug] = $component;
-            self::$logger->debug('Loaded component '.$component->slug);
+            self::$logger->debug('Loaded component ' . $component->slug);
         }
 
         return self::$components;
@@ -140,18 +140,18 @@ class ComponentApi
             'manage_units' => 'true',
             'source_language' => self::$defaultLocale,
             'file_format' => 'xliff',
-            'docfile' => new DataPart($content, $domain.'/'.self::$defaultLocale.'.xlf'),
+            'docfile' => new DataPart($content, $domain . '/' . self::$defaultLocale . '.xlf'),
         ];
         $formData = new FormDataPart($formFields);
 
-        $response = self::$client->request('POST', 'projects/'.self::$project.'/components/', [
+        $response = self::$client->request('POST', 'projects/' . self::$project . '/components/', [
             'headers' => $formData->getPreparedHeaders()->toArray(),
             'body' => $formData->bodyToString(),
         ]);
 
         if (201 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
-            throw new ProviderException('Unable to add weblate component '.$domain.'.', $response);
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
+            throw new ProviderException('Unable to add weblate component ' . $domain . '.', $response);
         }
 
         $result = $response->toArray();
@@ -159,7 +159,7 @@ class ComponentApi
         $component->created = true;
         self::$components[$component->slug] = $component;
 
-        self::$logger->debug('Added component '.$component->slug);
+        self::$logger->debug('Added component ' . $component->slug);
 
         return $component;
     }
@@ -177,13 +177,13 @@ class ComponentApi
         $response = self::$client->request('DELETE', $component->url);
 
         if (204 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
-            throw new ProviderException('Unable to delete weblate component '.$component->slug.'.', $response);
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
+            throw new ProviderException('Unable to delete weblate component ' . $component->slug . '.', $response);
         }
 
         unset(self::$components[$component->slug]);
 
-        self::$logger->debug('Deleted component '.$component->slug);
+        self::$logger->debug('Deleted component ' . $component->slug);
     }
 
     /**
@@ -201,10 +201,10 @@ class ComponentApi
         ]);
 
         if (200 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
-            throw new ProviderException('Unable to commit weblate component '.$component->slug.'.', $response);
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
+            throw new ProviderException('Unable to commit weblate component ' . $component->slug . '.', $response);
         }
 
-        self::$logger->debug('Committed component '.$component->slug);
+        self::$logger->debug('Committed component ' . $component->slug);
     }
 }
