@@ -41,9 +41,9 @@ class DTOFaker
 
         return [
             'slug' => $slug,
-            'url' => $faker->url().'?component_url',
-            'repository_url' => $faker->url().'?component_repository_url',
-            'translations_url' => $faker->url().'?component_translations_url',
+            'url' => $faker->url() . '?component_url',
+            'repository_url' => $faker->url() . '?component_repository_url',
+            'translations_url' => $faker->url() . '?component_translations_url',
         ];
     }
 
@@ -65,8 +65,8 @@ class DTOFaker
         return [
             'language_code' => $locale,
             'filename' => $faker->unique()->filePath(),
-            'file_url' => $faker->url().'?translation_file_url',
-            'units_list_url' => $faker->url().'?translation_units_list_url',
+            'file_url' => $faker->url() . '?translation_file_url',
+            'units_list_url' => $faker->url() . '?translation_units_list_url',
         ];
     }
 
@@ -87,7 +87,7 @@ class DTOFaker
 
         return [
             'context' => $slug,
-            'url' => $faker->url().'?unit_url',
+            'url' => $faker->url() . '?unit_url',
         ];
     }
 

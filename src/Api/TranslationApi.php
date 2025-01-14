@@ -62,15 +62,15 @@ class TranslationApi
         $response = self::$client->request('GET', $component->translations_url);
 
         if (200 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
-            throw new ProviderException('Unable to get weblate components translations for '.$component->slug.'.', $response);
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
+            throw new ProviderException('Unable to get weblate components translations for ' . $component->slug . '.', $response);
         }
 
         $results = $response->toArray()['results'];
         foreach ($results as $result) {
             $translation = new Translation($result);
             self::$translations[$component->slug][$translation->language_code] = $translation;
-            self::$logger->debug('Loaded translation '.$component->slug.' '.$translation->language_code);
+            self::$logger->debug('Loaded translation ' . $component->slug . ' ' . $translation->language_code);
         }
 
         if (isset(self::$translations[$component->slug][$locale])) {
@@ -107,8 +107,8 @@ class TranslationApi
         ]);
 
         if (201 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
-            throw new ProviderException('Unable to add weblate components translation for '.$component->slug.' '.$locale.'.', $response);
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
+            throw new ProviderException('Unable to add weblate components translation for ' . $component->slug . ' ' . $locale . '.', $response);
         }
 
         $result = $response->toArray()['data'];
@@ -116,7 +116,7 @@ class TranslationApi
         $translation->created = true;
         self::$translations[$component->slug][$locale] = $translation;
 
-        self::$logger->debug('Added translation '.$component->slug.' '.$locale);
+        self::$logger->debug('Added translation ' . $component->slug . ' ' . $locale);
 
         return $translation;
     }
@@ -145,11 +145,11 @@ class TranslationApi
         ]);
 
         if (200 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
-            throw new ProviderException('Unable to upload weblate translation '.$content.'.', $response);
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
+            throw new ProviderException('Unable to upload weblate translation ' . $content . '.', $response);
         }
 
-        self::$logger->debug('Uploaded translation '.$translation->filename);
+        self::$logger->debug('Uploaded translation ' . $translation->filename);
     }
 
     /**
@@ -165,11 +165,11 @@ class TranslationApi
         $response = self::$client->request('GET', $translation->file_url);
 
         if (200 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
             throw new ProviderException('Unable to download weblate translation.', $response);
         }
 
-        self::$logger->debug('Downloaded translation '.$translation->filename);
+        self::$logger->debug('Downloaded translation ' . $translation->filename);
 
         return $response->getContent();
     }

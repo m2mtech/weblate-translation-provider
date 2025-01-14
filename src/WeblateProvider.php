@@ -83,7 +83,7 @@ class WeblateProvider implements ProviderInterface
                 $content = $this->xliffFileDumper->formatCatalogue($catalogue, $domain, ['default_locale' => $this->defaultLocale]);
                 $component = ComponentApi::getComponent($domain, $content);
                 if (!$component) {
-                    $this->logger->error('Could not get/add component for '.$domain);
+                    $this->logger->error('Could not get/add component for ' . $domain);
 
                     continue;
                 }

@@ -60,15 +60,15 @@ class UnitApi
         $response = self::$client->request('GET', $translation->units_list_url);
 
         if (200 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
-            throw new ProviderException('Unable to get weblate units for '.$translation->filename.'.', $response);
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
+            throw new ProviderException('Unable to get weblate units for ' . $translation->filename . '.', $response);
         }
 
         $results = $response->toArray()['results'];
         foreach ($results as $result) {
             $unit = new Unit($result);
             self::$units[$translation->filename][$unit->context] = $unit;
-            self::$logger->debug('Loaded unit '.$translation->filename.' '.$unit->context);
+            self::$logger->debug('Loaded unit ' . $translation->filename . ' ' . $unit->context);
         }
 
         return self::$units[$translation->filename] ?? [];
@@ -125,11 +125,11 @@ class UnitApi
         ]);
 
         if (200 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
-            throw new ProviderException('Unable to add weblate unit for '.$translation->filename.' '.$key.'.', $response);
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
+            throw new ProviderException('Unable to add weblate unit for ' . $translation->filename . ' ' . $key . '.', $response);
         }
 
-        self::$logger->debug('Added unit '.$translation->filename.' '.$key);
+        self::$logger->debug('Added unit ' . $translation->filename . ' ' . $key);
     }
 
     /**
@@ -147,11 +147,11 @@ class UnitApi
         ]);
 
         if (200 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
-            throw new ProviderException('Unable to update weblate unit for '.$unit->context.' '.$value.'.', $response);
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
+            throw new ProviderException('Unable to update weblate unit for ' . $unit->context . ' ' . $value . '.', $response);
         }
 
-        self::$logger->debug('Updated unit '.$unit->context.' '.$value);
+        self::$logger->debug('Updated unit ' . $unit->context . ' ' . $value);
     }
 
     /**
@@ -167,10 +167,10 @@ class UnitApi
         $response = self::$client->request('DELETE', $unit->url);
 
         if (204 !== $response->getStatusCode()) {
-            self::$logger->debug($response->getStatusCode().': '.$response->getContent(false));
-            throw new ProviderException('Unable to delete weblate unit for '.$unit->context.'.', $response);
+            self::$logger->debug($response->getStatusCode() . ': ' . $response->getContent(false));
+            throw new ProviderException('Unable to delete weblate unit for ' . $unit->context . '.', $response);
         }
 
-        self::$logger->debug('Deleted unit '.$unit->context);
+        self::$logger->debug('Deleted unit ' . $unit->context);
     }
 }
